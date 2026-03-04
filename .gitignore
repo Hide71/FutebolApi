@@ -1,0 +1,65 @@
+## Compilação e binários
+bin/
+obj/
+[Bb]uild/
+[Bb]uild[Ll]og.*
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+## Publicação
+publish/
+*.pubxml
+*.publishproj
+
+## Configurações de usuário (IDE)
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+.vs/
+.vscode/
+
+## Arquivos temporários
+*.tmp
+*.temp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+## Pacotes NuGet
+*.nupkg
+*.snupkg
+packages/
+# Permitir que o restore baixe novamente
+!packages/build/
+.nuget/
+
+## Arquivos de configuração sensíveis
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+## Logs
+logs/
+*.log
+
+## Testes
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+## Cache do ASP.NET
+wwwroot/lib/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+## Outros
+_ReSharper*/
+*.resharper
+*.DotSettings.user
