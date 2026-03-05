@@ -1,4 +1,8 @@
+using FutebolApi.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Sources=Futebol.db"));
 var app = builder.Build();
 
 app.MapGet("/usuario", () =>
