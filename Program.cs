@@ -1,37 +1,50 @@
 using FutebolApi.Data;
+using FutebolApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Sources=Futebol.db"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=Futebol.db"));
 var app = builder.Build();
 
-app.MapGet("/usuario", () =>
+app.MapGet("/times", async (AppDbContext db) =>
 {
-    List<string> Nomes = new List <string>
+   return await db.Times.ToListAsync();
+});
+app.MapGet("times/{id}", async (int id, AppDbContext db) =>
+{
+    var time = await db.Times.FindAsync(id);
+     return time is not null ? Results.Ok(time) : Results.NotFound("time não foi encontrado"); 
+});
+app.MapPost("/times", async (AppDbContext db, Time novoTime) =>
+{
+     db.Times.Add(novoTime);
+     await db.SaveChangesAsync();
+     return Results.Created($" O time {novoTime.Nome} foi criado com sucesso", novoTime);
+});
+app.MapPut("/times/{id}", async (int id, AppDbContext db, Time timeAtualizado) =>
+{
+    var time = await db.Times.FindAsync(id);
+    if(time is null) 
     {
-        "João",
-        "Paulo",
-        "Miguel",
-        "Yuri Alberto"
-        
-    };
-    return Nomes;
+        return Results.NotFound("Time não foi encontrado");
+    }
+    time.Nome = timeAtualizado.Nome;
+    time.Cidade = timeAtualizado.Cidade;
+    time.Brasileiros = timeAtualizado.Brasileiros;
+    time.Mundiais = timeAtualizado.Mundiais;
+    await db.SaveChangesAsync();
+    return Results.Ok(time);
 });
-app.MapPost("/usuario", (string nome) =>
+app.MapDelete("/times/{id}", async (int id, AppDbContext db) =>
 {
-    return Results.Ok($"O nome {nome} foi adicionado com sucesso");
-});
-app.MapPut("/usuario/{id}", (int id, string novoNome) =>
-{
-    return Results.Ok($"Nome de usuario id {id} alterado para {novoNome} com sucesso! ");
-});
-app.MapPatch("usuario/{id}", (int id, string campo, string valor ) =>
-{
-    return Results.Ok($" Usuario {id} teve o campo {campo} alterado para {valor} com sucesso");
-});
-app.MapDelete("usuario/{id}", (int id) =>
-{
-    return Results.Ok($"Usuario com o id {id} remmovido com sucesso");
+    var time = db.Times.Find(id);
+    if (time is null)
+    {
+        return Results.NotFound("Time não foi encontrado");
+    }
+    db.Times.Remove(time);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
 });
 
 app.Run();
