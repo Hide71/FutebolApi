@@ -64,3 +64,8 @@ C:\Hideraldo\FutebolApi\obj\Debug\net9.0\refint\FutebolApi.dll
 C:\Hideraldo\FutebolApi\obj\Debug\net9.0\FutebolApi.pdb
 C:\Hideraldo\FutebolApi\obj\Debug\net9.0\FutebolApi.genruntimeconfig.cache
 C:\Hideraldo\FutebolApi\obj\Debug\net9.0\ref\FutebolApi.dll
+C:\Hideraldo\FutebolApi\obj\Debug\net9.0\FutebolApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Hideraldo\FutebolApi\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Hideraldo\FutebolApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Hideraldo\FutebolApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Hideraldo\FutebolApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
