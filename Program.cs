@@ -3,10 +3,20 @@ using FutebolApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(op => 
+{
+    op.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=Futebol.db"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
+app.UseCors();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
